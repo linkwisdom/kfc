@@ -1,0 +1,13 @@
+{
+  "name": "kfc",
+  "version": "0.0.5",
+  "description": "kits for components",
+  "scripts": {
+    "test": "node test/test.js"
+  },
+  "dependencies": {
+    "eslint-plugin-promise": "^3.6.0",
+    "etpl": "^3.2.0",
+    "htmlparser2": "^3.9.2"
+  }
+}
