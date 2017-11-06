@@ -4,4 +4,8 @@ var kfc = require('../src')
 var data = kfc.parse(__dirname + '/composide/main.tpl')
 
 // 模板转为html字符串
-console.log(kfc.stringify(data))
+var html = kfc.stringify(data)
+
+html = kfc.tidy(html)
+
+console.log(html)

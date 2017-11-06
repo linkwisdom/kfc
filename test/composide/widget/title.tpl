@@ -1,12 +1,3 @@
-
-<a href="{{${title_url}}}" data-url="{{${log_url}}}">
-    <div class="title">{{${title_text}}}</div>
+<a href="{{$data.url}}" data-url="{{$data.url}}">
+    <div class="title">{{$data.title}}</div>
 </a>
-
-<script type="text/javascript">
-export default {
-    popup () {
-
-    }
-}
-</script>

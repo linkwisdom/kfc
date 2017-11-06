@@ -1,4 +1,4 @@
 <div class="footer">
-    <a href="liandong.org">welcome!</a>
-    <a href="call">call me!</a>
+    <a href="{{$data.url}}">{{$data.showurl}}</a>
+    <a href="call">{{$data.phone}}</a>
 </div>

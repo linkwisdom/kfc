@@ -1,0 +1,48 @@
+<template>
+    <div class="adx-box">
+        <a href="{{AD_FANGHUA_TITLE_URL}}" data-url="{{AD_FANGHUA_TITLE_URL}}">
+            <div class="title">
+                {{AD_FANGHUA_TITLE}}
+            </div>
+        </a>
+        <div class="content">
+            <a>
+                <p>
+                    {{AD_FANGHUA_DESC}}
+                </p>
+            </a>
+        </div>
+        <div class="footer">
+            <a href="{{AD_FANGHUA_TITLE_URL}}">
+                {{AD_FANGHUA_SHOWURL}}
+            </a>
+            <a href="call">
+                {{AD_FANGHUA_PHONE}}
+            </a>
+        </div>
+    </div>
+</template>
+<script>
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = {
+    data: function data() {
+        return {
+            title: 'ad-title',
+            url: 'ad-url'
+        };
+    }
+};
+</script>
+<style>
+.content {
+  color: #333;
+  padding: 10px;
+}
+,.adx-box .title {
+  color: #333;
+}
+</style>

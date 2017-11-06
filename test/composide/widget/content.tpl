@@ -1,5 +1,11 @@
 <div class="content">
     <a>
-        <p>广告创意</p>
+        <p>{{$data.content}}</p>
     </a>
 </div>
+<style type="text/css" lang="less">
+    .content {
+        color: #333;
+        padding: 10px;
+    }
+</style>

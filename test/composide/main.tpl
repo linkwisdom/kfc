@@ -1,26 +1,38 @@
-<link import="./widget/title.tpl" name="adx-title">
-<link import="./widget/content.tpl" name="adx-content">
-<link import="./widget/footer.tpl" name="adx-footer">
-<div class="ad-box" :module-name="adRework" :title="javascript">
-    <adx-title
-        :title_url="brand_sc_params_url"
-        :log_url="brand_sc_params_url_unencrypted"
-        :title_text="title text ${title}">
-        ${title}
-    </adx-title>
-    <div>
-        <adx-content></adx-content>
+<template>
+    <link import="./widget/title.tpl" name="adx-title">
+    <link import="./widget/content.tpl" name="adx-content">
+    <link import="./widget/footer.tpl" name="adx-footer">
+    <div class="adx-box">
+        <adx-title
+            :title="AD_FANGHUA_TITLE"
+            :url="AD_FANGHUA_TITLE_URL">
+        </adx-title>
+        <adx-content
+            :content="AD_FANGHUA_DESC">
+        </adx-content>
+        <adx-footer
+            :phone="AD_FANGHUA_PHONE"
+            :showurl="AD_FANGHUA_SHOWURL"
+            :url="AD_FANGHUA_TITLE_URL"> 
+        </adx-footer>
     </div>
-    <adx-footer></adx-footer>
-</div>
+</template>
 
 <script type="text/javascript">
 export default {
-    let a = 1
-    function () {
-        console.log('hello world')
+    data () {
+        return {
+            title: 'ad-title',
+            url: 'ad-url'
+        }
     }
 }
 </script>
 
-<style type="text/css"></style>
+<style type="text/css" lang="less">
+.adx-box {
+    .title {
+        color: #333;
+    }
+}
+</style>
