@@ -13,13 +13,14 @@ proto.parse = function (content, file) {
             var parent = stack[stack.length - 1]
             current = new Context(parent, attribs, name)
             stack.push(current)
-            parent.children.push(current)
+            parent.child.push(current)
         },
         ontext (text) {
             text = text.trim()
-            if (text) {
-                current.children.push({
+            if (text && current.child) {
+                current.child.push({
                     tag: 'TextNode',
+                    node: 'text',
                     indent: current.indent + current.gap,
                     data: current.data,
                     content: text

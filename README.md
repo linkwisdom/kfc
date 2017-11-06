@@ -6,8 +6,14 @@
 ### 构建单个文件
 
 ```sh
-    # npm i kfc -g
-    kfc test_file.tpl > result.tpl
+# npm i kfc -g
+
+kfc test_file.tpl > result.tpl
+
+# 参数化任务
+> kfc test.tpl
+> kfc parse stringify tidy test.tpl
+> kfc parse stringify minify test.tpl
 ```
 
 ### 自定义构建方法
@@ -28,6 +34,7 @@ console.log(content)
 - 支持模板的组件化定义
 - 支持模板变量定义
 - 支持嵌套js/css
+- 支持导入外链js/css
 - 支持转化es6/ts/less
 - 支持模板变量、属性定义
 
@@ -35,7 +42,8 @@ console.log(content)
 ### 🌰 Example 🌰
 
 > 参考[composide](//unpkg.com/kfc/test/composide/)
-> 输出结果 [composide/result][//unpkg.com/kfc/test/composide/result.html]
+
+> 输出结果 [composide/result](//unpkg.com/kfc/test/composide/result.html)
 
 ```html
 <template>
@@ -69,6 +77,7 @@ export default {
 }
 </script>
 
+<style type="text/css" src="./style.less" lang="less"></style>
 <style type="text/css" lang="less">
 .adx-box {
     .title {
@@ -76,4 +85,19 @@ export default {
     }
 }
 </style>
+```
+
+### 🌰 Example 2 🌰
+
+#### json2html
+
+```sh
+# 读取json文件，序列化并且格式化
+> kfc readJson stringify tidy data.json > result.html
+```
+
+### html2json
+
+```sh
+> kfc parse test.tpl > data.json
 ```

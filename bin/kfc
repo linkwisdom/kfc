@@ -3,9 +3,30 @@
 var kfc = require('../src/index')
 var args = [].slice.call(process.argv, 2)
 
-if (args.length) {
-    args.forEach(function (file) {
-        var c = kfc.parse(file)
-        console.log(kfc.stringify(c))
+var help = `
+## kfc -commandlist targetfile
+
+> kfc test.tpl
+> kfc parse stringify tidy test.tpl
+> kfc parse stringify minify test.tpl
+`
+
+if (args.length === 1) {
+    args.unshift('parse', 'stringify', 'tidy')
+}
+
+if (args.length > 1) {
+    var result = args.pop()
+    args.forEach(function (command) {
+        if (typeof kfc[command] === 'function') {
+            result = kfc[command](result)
+        }
     })
+    if (typeof result === 'object') {
+        result = JSON.stringify(result, ' ', 4)
+    }
+    console.log(result)
+}
+else {
+    console.log(help)
 }

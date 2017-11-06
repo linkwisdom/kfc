@@ -17,32 +17,35 @@ function Context (parent, attribs = {}, tag = 'root') {
         }
     }
     this.tag = tag || 'div'
-    this.attributes = attr
+    this.node = 'element'
+    this.attr = attr
     this.slots = {}
     this.file = parent.file || ''
     this.data = Object.assign({}, parent.data, data)
     this.indent = parent.indent + this.gap
-    this.children = []
+    this.child = []
 
     // 如果是根元素，不需要缩进
     if (tag === 'root') {
-        this.isRoot = true
+        this.node = 'root'
         this.indent = ''
     }
-    if (parent.isRoot) {
+    if (parent.node === 'root') {
         this.indent = ''
     }
 }
 
 Context.prototype = {
+    node: 'element', // 节点类型 root / element /text
     gap: '    ',
     indent: '',
+    text: '', // 文本内容
     tag: 'div',
-    file: './',
-    slots: {},
-    attributes: {class: 'ad-box-wrapper'},
+    file: './', // 跟节点文件来源
+    slots: {}, // 插槽元素
+    attr: {class: 'ad-box-wrapper'},
     data: {},
-    children: []
+    child: []
 }
 
 module.exports = Context

@@ -1,0 +1,183 @@
+{
+    "tag": "root",
+    "node": "root",
+    "attr": {},
+    "slots": {},
+    "file": "test/composide/main.tpl",
+    "data": {},
+    "indent": "",
+    "child": [
+        {
+            "tag": "template",
+            "node": "element",
+            "attr": {},
+            "slots": {},
+            "file": "test/composide/main.tpl",
+            "data": {},
+            "indent": "",
+            "child": [
+                {
+                    "tag": "link",
+                    "node": "element",
+                    "attr": {
+                        "import": "./widget/title.tpl",
+                        "name": "adx-title"
+                    },
+                    "slots": {},
+                    "file": "test/composide/main.tpl",
+                    "data": {},
+                    "indent": "    ",
+                    "child": []
+                },
+                {
+                    "tag": "link",
+                    "node": "element",
+                    "attr": {
+                        "import": "./widget/content.tpl",
+                        "name": "adx-content"
+                    },
+                    "slots": {},
+                    "file": "test/composide/main.tpl",
+                    "data": {},
+                    "indent": "    ",
+                    "child": []
+                },
+                {
+                    "tag": "link",
+                    "node": "element",
+                    "attr": {
+                        "import": "./widget/footer.tpl",
+                        "name": "adx-footer"
+                    },
+                    "slots": {},
+                    "file": "test/composide/main.tpl",
+                    "data": {},
+                    "indent": "    ",
+                    "child": []
+                },
+                {
+                    "tag": "div",
+                    "node": "element",
+                    "attr": {
+                        "class": "adx-box"
+                    },
+                    "slots": {},
+                    "file": "test/composide/main.tpl",
+                    "data": {},
+                    "indent": "    ",
+                    "child": [
+                        {
+                            "tag": "adx-title",
+                            "node": "element",
+                            "attr": {},
+                            "slots": {},
+                            "file": "test/composide/main.tpl",
+                            "data": {
+                                "title": "AD_FANGHUA_TITLE",
+                                "url": "AD_FANGHUA_TITLE_URL"
+                            },
+                            "indent": "        ",
+                            "child": []
+                        },
+                        {
+                            "tag": "adx-content",
+                            "node": "element",
+                            "attr": {},
+                            "slots": {},
+                            "file": "test/composide/main.tpl",
+                            "data": {
+                                "content": "AD_FANGHUA_DESC"
+                            },
+                            "indent": "        ",
+                            "child": []
+                        },
+                        {
+                            "tag": "adx-footer",
+                            "node": "element",
+                            "attr": {},
+                            "slots": {},
+                            "file": "test/composide/main.tpl",
+                            "data": {
+                                "phone": "AD_FANGHUA_PHONE",
+                                "showurl": "AD_FANGHUA_SHOWURL",
+                                "url": "AD_FANGHUA_TITLE_URL"
+                            },
+                            "indent": "        ",
+                            "child": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "tag": "script",
+            "node": "element",
+            "attr": {
+                "type": "text/javascript",
+                "src": "./main.js",
+                "lang": "babel"
+            },
+            "slots": {},
+            "file": "test/composide/main.tpl",
+            "data": {},
+            "indent": "",
+            "child": []
+        },
+        {
+            "tag": "script",
+            "node": "element",
+            "attr": {
+                "type": "text/javascript",
+                "lang": "babel"
+            },
+            "slots": {},
+            "file": "test/composide/main.tpl",
+            "data": {},
+            "indent": "",
+            "child": [
+                {
+                    "tag": "TextNode",
+                    "node": "text",
+                    "indent": "    ",
+                    "data": {},
+                    "content": "export default {\n    data () {\n        return {\n            title: 'ad-title',\n            url: 'ad-url'\n        }\n    }\n}"
+                }
+            ]
+        },
+        {
+            "tag": "style",
+            "node": "element",
+            "attr": {
+                "type": "text/css",
+                "src": "./style.less",
+                "lang": "less"
+            },
+            "slots": {},
+            "file": "test/composide/main.tpl",
+            "data": {},
+            "indent": "",
+            "child": []
+        },
+        {
+            "tag": "style",
+            "node": "element",
+            "attr": {
+                "type": "text/css",
+                "lang": "less"
+            },
+            "slots": {},
+            "file": "test/composide/main.tpl",
+            "data": {},
+            "indent": "",
+            "child": [
+                {
+                    "tag": "TextNode",
+                    "node": "text",
+                    "indent": "    ",
+                    "data": {},
+                    "content": ".adx-box {\n    .title {\n        color: #333;\n    }\n}"
+                }
+            ]
+        }
+    ]
+}

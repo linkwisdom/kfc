@@ -1,6 +1,6 @@
 {
   "name": "kfc",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "kits for components",
   "author": {
     "name": "liu@liandong.org"
@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "babel-core": "^6.26.0",
-    "etpl": "^3.2.0",
+    "html-minifier": "^3.5.6",
     "htmlparser2": "^3.9.2"
   },
   "devDependencies": {

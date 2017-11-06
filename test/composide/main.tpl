@@ -18,7 +18,8 @@
     </div>
 </template>
 
-<script type="text/javascript">
+<script type="text/javascript" src="./main.js" lang="babel"></script>
+<script type="text/javascript" lang="babel">
 export default {
     data () {
         return {
@@ -29,6 +30,7 @@ export default {
 }
 </script>
 
+<style type="text/css" src="./style.less" lang="less"></style>
 <style type="text/css" lang="less">
 .adx-box {
     .title {

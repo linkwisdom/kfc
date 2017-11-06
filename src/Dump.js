@@ -12,19 +12,19 @@ module.exports = {
         Object.assign(comp.data, shell.data)
         comp.slots = shell.slots
         comp.indent = shell.indent + comp.indent
-        if (!comp.children) {
+        if (!comp.child) {
             return comp
         }
-        comp.children.forEach(item => {
+        comp.child.forEach(item => {
             this.mixContext(item, shell)
         })
         return comp
     },
-    attributes (node) {
+    attr (node) {
         var arr = ['']
-        var {attributes, data} = node
-        for (const key in attributes) {
-            const text = tpl.render(attributes[key], node)
+        var {attr, data} = node
+        for (const key in attr) {
+            const text = tpl.render(attr[key], node)
             arr.push(`${key}="${text}"`)
         }
         if (this.printData) {
@@ -44,15 +44,16 @@ module.exports = {
             node._finished = true
             return this.print(comp)
         }
-        // console.log(tagName, node.content)
-        if (plugin.hasOwnProperty(tagName) && node.children.length) {
-            node.content = node.children[0].content || ''
+        if (plugin.hasOwnProperty(tagName)) {
+            if (node.child.length) {
+                node.content = node.child[0].content || ''
+            }
             node.content = plugin[tagName](node)
             if (node._finished) {
                 return ''
             }
         }
-        const attr = this.attributes(node)
+        const attr = this.attr(node)
         return `${node.indent}<${node.tag}${attr}>`
     },
     endTag (node) {
@@ -68,10 +69,11 @@ module.exports = {
         if (node.content) {
             return node.indent + node.content.replace(/\n/g, '\n' + node.indent)
         }
-        if (node.children.length < 1) {
+        if (!node.child || node.child.length < 1) {
+            console.dir(node)
             return
         }
-        const items = node.children
+        const items = node.child
         const arr = items.map(item => {
             // 插槽内容先跳过
             if (item.slotName) {
@@ -82,25 +84,29 @@ module.exports = {
         return arr.join('\n')
     },
     print (node) {
-        if (node.tag === 'TextNode') {
+        if (node.node === 'text') {
             var text = tpl.render(node.content, node)
             text = text.replace(/\n/g, '\n' + node.indent)
             return node.indent + text
         }
         // <link import="./title.tpl" name="title"></link>
-        if (node.tag === 'link' && node.attributes.import) {
-            var comp = this.import(node.attributes.import, node.file)
-            components[node.attributes.name || comp.tag] = comp
+        if (node.tag === 'link' && node.attr.import) {
+            var comp = this.import(node.attr.import, node.file)
+            components[node.attr.name || comp.tag] = comp
             return
+        }
+        if ((node.tag === 'script' || node.tag === 'style') && node.attr.src) {
+            node.content = this.readFile(node.attr.src, node.file)
+            node.attr.src = ''
         }
         if (node.tag === 'slot') {
             // 支持插槽
-            const slotName = node.attributes['name'] || 'content'
+            const slotName = node.attr['name'] || 'content'
             // node.slots是通过源组件传递过来的
             return node.slots[slotName] || ''
         }
         const arr = []
-        if (!node.isRoot) {
+        if (node.node === 'element') {
             var c = this.startTag(node)
             c.trim() && arr.push(c)
         }
@@ -108,7 +114,7 @@ module.exports = {
             c = this.content(node)
             c && arr.push(c)
         }
-        if (!node.isRoot) {
+        if (node.node === 'element') {
             c = this.endTag(node)
             c && arr.push(c)
         }
