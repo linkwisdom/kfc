@@ -1,4 +1,5 @@
-var etpl = require('etpl')
+var tpl = require('./tpl')
+var plugin = require('./plugin')
 
 const SIGNLE_TAGS = ['input', 'img', 'hr', 'link']
 
@@ -22,13 +23,13 @@ module.exports = {
     attributes (node) {
         var arr = ['']
         var {attributes, data} = node
-        for (let key in attributes) {
-            var text = etpl.compile(attributes[key])(node.data)
+        for (const key in attributes) {
+            const text = tpl.render(attributes[key], node)
             arr.push(`${key}="${text}"`)
         }
         if (this.printData) {
-            for (let key in data) {
-                var text = etpl.compile(data[key])(node.data)
+            for (const key in data) {
+                const text = tpl.render(data[key], node)
                 arr.push(`:${key}="${text}"`)
             }
         }
@@ -43,6 +44,14 @@ module.exports = {
             node._finished = true
             return this.print(comp)
         }
+        // console.log(tagName, node.content)
+        if (plugin.hasOwnProperty(tagName) && node.children.length) {
+            node.content = node.children[0].content || ''
+            node.content = plugin[tagName](node)
+            if (node._finished) {
+                return ''
+            }
+        }
         const attr = this.attributes(node)
         return `${node.indent}<${node.tag}${attr}>`
     },
@@ -53,6 +62,15 @@ module.exports = {
         return `${node.indent}</${node.tag}>`
     },
     content (node) {
+        if (node._finished) {
+            return ''
+        }
+        if (node.content) {
+            return node.indent + node.content.replace(/\n/g, '\n' + node.indent)
+        }
+        if (node.children.length < 1) {
+            return
+        }
         const items = node.children
         const arr = items.map(item => {
             // 插槽内容先跳过
@@ -65,8 +83,8 @@ module.exports = {
     },
     print (node) {
         if (node.tag === 'TextNode') {
-            var text = etpl.compile(node.content)(node.data)
-            text = text.replace(/\n/g,  '\n' + node.indent)
+            var text = tpl.render(node.content, node)
+            text = text.replace(/\n/g, '\n' + node.indent)
             return node.indent + text
         }
         // <link import="./title.tpl" name="title"></link>
@@ -82,11 +100,18 @@ module.exports = {
             return node.slots[slotName] || ''
         }
         const arr = []
-        arr.push(this.startTag(node))
-        var c = this.content(node)
-        c && arr.push(c)
-        c = this.endTag(node)
-        c && arr.push(c)
+        if (!node.isRoot) {
+            var c = this.startTag(node)
+            c.trim() && arr.push(c)
+        }
+        if (!node._finished) {
+            c = this.content(node)
+            c && arr.push(c)
+        }
+        if (!node.isRoot) {
+            c = this.endTag(node)
+            c && arr.push(c)
+        }
         return arr.join('\n')
     }
 }

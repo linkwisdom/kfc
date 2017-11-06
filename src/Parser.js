@@ -40,9 +40,7 @@ proto.import = function (file) {
     return this.parse(content, file)
 }
 
-
-function Parser(option) {
-}
+function Parser (option) {}
 
 Object.assign(Parser.prototype, proto)
 

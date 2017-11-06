@@ -1,13 +1,32 @@
 {
   "name": "kfc",
-  "version": "0.0.5",
+  "version": "0.0.8",
   "description": "kits for components",
+  "author": {
+    "name": "liu@liandong.org"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/linkwisdom/kfc.git"
+  },
   "scripts": {
     "test": "node test/test.js"
   },
+  "bin": {
+    "kfc": "./bin/kfc"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  },
   "dependencies": {
-    "eslint-plugin-promise": "^3.6.0",
+    "babel-core": "^6.26.0",
     "etpl": "^3.2.0",
     "htmlparser2": "^3.9.2"
+  },
+  "devDependencies": {
+    "eslint-plugin-promise": "^3.6.0",
+    "babel-preset-es2015": "^6.24.1"
   }
 }

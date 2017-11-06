@@ -34,16 +34,29 @@ console.log(content)
 
 ### 🌰 Example 🌰
 
-```html
-<link import="./widget/title.tpl" name="adx-title">
-<link import="./widget/content.tpl" name="adx-content">
-<link import="./widget/footer.tpl" name="adx-footer">
+> 参考[composide](//unpkg.com/kfc/test/composide/)
+> 输出结果 [composide/result][//unpkg.com/kfc/test/composide/result.html]
 
-<adx-box class="adx-box">
-    <adx-title :title="title" :url="url"></adx-title>
-    <adx-content :content="ad-content"></adx-content>
-    <adx-footer></adx-footer>
-</adx-box>
+```html
+<template>
+    <link import="./widget/title.tpl" name="adx-title">
+    <link import="./widget/content.tpl" name="adx-content">
+    <link import="./widget/footer.tpl" name="adx-footer">
+    <div class="adx-box">
+        <adx-title
+            :title="AD_FANGHUA_TITLE"
+            :url="AD_FANGHUA_TITLE_URL">
+        </adx-title>
+        <adx-content
+            :content="AD_FANGHUA_DESC">
+        </adx-content>
+        <adx-footer
+            :phone="AD_FANGHUA_PHONE"
+            :showurl="AD_FANGHUA_SHOWURL"
+            :url="AD_FANGHUA_TITLE_URL"> 
+        </adx-footer>
+    </div>
+</template>
 
 <script type="text/javascript">
 export default {
